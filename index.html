@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#E9F1F4">
+    <meta name="description" content="Convert torrent files to magnet links privately in your browser. Your files stay on your device.">
+    <title>Torrent to Magnet Converter — private, browser-only conversion</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script type="module" src="./src/app.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="Torrent to Magnet Converter home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 34 34" fill="none">
+            <path d="M9 6v12a8 8 0 0 0 16 0V6" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+            <path d="M9 6v7" stroke="#F36B56" stroke-width="5" stroke-linecap="round"/>
+            <path d="M25 6v7" stroke="#49B7A5" stroke-width="5" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span>Torrent to Magnet Converter</span>
+      </a>
+      <p class="privacy-note"><span class="privacy-dot" aria-hidden="true"></span>Your files stay on this device</p>
+    </header>
+
+    <main class="page-shell">
+      <div class="hero-grid">
+        <section class="intro" aria-labelledby="page-title">
+          <div class="intro-copy">
+            <p class="eyebrow">A small, private conversion tool</p>
+            <h1 id="page-title">From torrent file<br>to magnet link.</h1>
+            <p class="intro-text">Drop one file or a whole batch. Your torrent data is read here, in your browser, and nowhere else.</p>
+            <div class="format-list" aria-label="Supported torrent formats">
+              <span>BitTorrent v1</span>
+              <span>BitTorrent v2</span>
+              <span>Hybrid</span>
+            </div>
+          </div>
+
+          <figure class="magnet-figure">
+            <svg viewBox="0 0 460 280" role="img" aria-labelledby="magnet-title magnet-desc">
+              <title id="magnet-title">A horseshoe magnet with soft field lines</title>
+              <desc id="magnet-desc">An illustrated teal magnet with coral and green poles, surrounded by fine curved lines.</desc>
+              <path d="M61 118C62 43 143 18 230 18s168 25 169 100" class="field-line field-coral"/>
+              <path d="M93 134c0-57 58-86 137-86s137 29 137 86" class="field-line field-lagoon"/>
+              <path d="M126 147c0-37 42-58 104-58s104 21 104 58" class="field-line field-citron"/>
+              <path d="M142 71v96a88 88 0 0 0 176 0V71" class="magnet-outline"/>
+              <path d="M142 72v49" class="magnet-pole magnet-pole-coral"/>
+              <path d="M318 72v49" class="magnet-pole magnet-pole-lagoon"/>
+              <path d="M142 72v-8h36v8M282 72v-8h36v8" class="pole-cap"/>
+              <circle cx="142" cy="165" r="5" fill="#F9FBFA"/>
+              <circle cx="318" cy="165" r="5" fill="#F9FBFA"/>
+            </svg>
+            <figcaption>One quick conversion. No upload. No account.</figcaption>
+          </figure>
+        </section>
+
+        <section class="converter" aria-labelledby="converter-title">
+          <div class="converter-heading">
+            <div>
+              <p class="eyebrow">Your workspace</p>
+              <h2 id="converter-title">Make a magnet link</h2>
+            </div>
+            <button class="clear-button" id="clear-results" type="button" disabled>Clear all</button>
+          </div>
+
+          <input id="file-input" class="visually-hidden" type="file" accept=".torrent,application/x-bittorrent" multiple aria-label="Select .torrent files">
+          <label class="dropzone" id="dropzone" for="file-input">
+            <span class="drop-icon" aria-hidden="true">
+              <svg viewBox="0 0 28 28" fill="none">
+                <path d="M14 19V5m0 0L8.5 10.5M14 5l5.5 5.5M5 18.5v4h18v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="drop-title">Drop your .torrent files here</span>
+            <span class="drop-hint">You can add more than one at a time</span>
+            <span class="browse-button" aria-hidden="true">Browse files</span>
+          </label>
+
+          <p class="status-message" id="status-message" role="status" aria-live="polite">Ready when you are.</p>
+          <div class="results" id="results" aria-live="polite"></div>
+        </section>
+      </div>
+
+      <details class="how-it-works">
+        <summary>How it works</summary>
+        <p>The converter reads the torrent’s info dictionary, calculates its v1 SHA-1 or v2 SHA-256 info hash, and builds a magnet link. The selected file is never uploaded or saved by this page.</p>
+      </details>
+    </main>
+
+    <footer class="site-footer">
+      <span>Made for the moment you need the link, not the file.</span>
+      <span>Everything stays in your browser.</span>
+    </footer>
+  </body>
+</html>
