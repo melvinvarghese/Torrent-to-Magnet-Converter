@@ -152,6 +152,8 @@ h2 { margin-bottom: 0; font-family: var(--serif); font-size: 29px; font-weight: 
 .how-it-works p { max-width: 680px; margin: 2px 0 14px; color: var(--muted); font-size: 14px; line-height: 1.65; }
 
 .site-footer { display: flex; justify-content: space-between; gap: 20px; margin-top: 33px; padding: 18px 0 25px; border-top: 1px solid rgba(22, 43, 52, .12); color: var(--muted); font-size: 12px; }
+.site-footer a { color: inherit; text-decoration-color: var(--lagoon); text-underline-offset: 2px; }
+.site-footer a:hover { color: var(--ink); }
 .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 :focus-visible { outline: 3px solid #196E67; outline-offset: 3px; }
 #file-input:focus-visible + .dropzone { outline: 3px solid #196E67; outline-offset: 5px; }
