@@ -20,16 +20,6 @@ Convert `.torrent` files to magnet links for BitTorrent v1, v2, and hybrid torre
 
 The converter reads files in browser memory. It does not upload them, save them, or send them to analytics.
 
-## Run locally
-
-You need Node.js 20 or newer and Python 3.
-
-```bash
-npm test
-python3 -m http.server 8000
-```
-
-Open <http://127.0.0.1:8000/> in a browser. For the browser smoke checks, start the server and open <http://127.0.0.1:8000/test/browser-smoke.html>.
 
 ## Limits
 
