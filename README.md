@@ -1,6 +1,6 @@
 # Free Torrent to Magnet Converter
 
-[Open the online converter](https://melvinvarghese.github.io/torrent-to-magnet-converter/).
+[Open the online converter](https://melvinvarghese.github.io/Torrent-to-Magnet-Converter/).
 
 Convert `.torrent` files to magnet links for BitTorrent v1, v2, and hybrid torrents. Files are processed in your browser and stay on your device.
 
