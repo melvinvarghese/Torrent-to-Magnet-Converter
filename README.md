@@ -14,7 +14,7 @@ Convert `.torrent` files to magnet links for BitTorrent v1, v2, and hybrid torre
 
 ## How to use it
 
-1. Open the [converter](https://melvinvarghese.github.io/torrent-to-magnet-converter/).
+1. Open the [converter](https://melvinvarghese.github.io/Torrent-to-Magnet-Converter/).
 2. Drop in one or more `.torrent` files, or choose them with **Browse files**.
 3. Copy a generated magnet link into your BitTorrent client.
 
