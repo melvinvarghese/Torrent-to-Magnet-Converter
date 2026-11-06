@@ -42,21 +42,30 @@ h1 { margin: 0; font-size: clamp(40px, 5.4vw, 80px); line-height: .99; letter-sp
 .upload-panel { border-right: 1px solid var(--line); }
 h2 { margin: 0; font-size: 28px; line-height: 1.2; letter-spacing: -1px; }
 .panel-description { color: var(--muted); margin: 4px 0 20px; }
-.dropzone { min-height: 300px; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; padding: 30px 18px; border: 2px dashed var(--line); border-radius: 7px; cursor: pointer; transition: background-color .15s, border-color .15s; }
-.dropzone:hover, .dropzone.is-dragging { background: var(--field); border-color: var(--focus); }
-.dropzone.is-working { opacity: .65; cursor: progress; }
+.dropzone { min-height: 300px; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; padding: 30px 18px; border: 2px dashed var(--line); border-radius: 7px; cursor: pointer; transition: background-color .15s, border-color .15s, box-shadow .15s; }
+.dropzone:hover { background: color-mix(in srgb, var(--accent) 22%, var(--surface)); border-color: var(--focus); }
+.dropzone.is-dragging { background: color-mix(in srgb, var(--accent) 45%, var(--surface)); border: 2px solid var(--focus); box-shadow: inset 0 0 0 4px color-mix(in srgb, var(--accent) 35%, transparent); }
+.dropzone.is-working { background: var(--field); border-color: var(--focus); border-style: solid; cursor: progress; }
 .drop-icon { width: 60px; height: 60px; margin-bottom: 19px; fill: none; stroke: var(--muted); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
 .drop-title { font-size: 23px; font-weight: 700; letter-spacing: -.6px; }
 .drop-hint { color: var(--muted); margin-top: 2px; }
 .browse-button { display: inline-flex; align-items: center; justify-content: center; min-width: 205px; min-height: 48px; margin-top: 22px; padding: 10px 24px; background: var(--accent); color: var(--ink); border-radius: 5px; font-weight: 700; }
-.dropzone:hover .browse-button { background: var(--accent-hover); }
+.dropzone:hover .browse-button, .dropzone.is-dragging .browse-button { background: var(--accent-hover); }
 .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 #file-input:focus-visible + .dropzone { outline: 3px solid var(--focus); outline-offset: 5px; }
 .converter-heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.results-title-group { min-width: 0; display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+.file-count { padding: 3px 9px; background: var(--field); border-radius: 999px; color: var(--muted); font-size: 12px; font-weight: 600; white-space: nowrap; }
 .clear-button { border: 0; background: transparent; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; padding: 8px 0 8px 8px; flex: none; font-size: 14px; }
 .clear-button:hover:enabled { color: var(--ink); }
 .clear-button:disabled { opacity: .45; cursor: default; }
 .status-message { color: var(--muted); margin: 22px 0 12px; font-size: 14px; }
+.batch-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 14px; padding: 12px 14px; background: color-mix(in srgb, var(--accent) 24%, var(--surface)); border-radius: 5px; }
+.batch-actions[hidden] { display: none; }
+.links-ready { font-size: 13px; font-weight: 700; }
+.batch-buttons { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+.batch-button { min-height: 38px; padding: 7px 12px; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); color: var(--ink); font-size: 13px; font-weight: 600; }
+.batch-button:hover { border-color: var(--focus); background: var(--accent); }
 .empty-state { text-align: center; color: var(--muted); padding: 45px 12px 34px; }
 .empty-icon { width: 38px; height: 38px; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; margin-bottom: 10px; }
 .empty-state p { margin: 0 0 4px; font-weight: 600; color: var(--ink); }
@@ -65,6 +74,9 @@ h2 { margin: 0; font-size: 28px; line-height: 1.2; letter-spacing: -1px; }
 .results { display: grid; gap: 14px; }
 .result-row { padding: 18px; border: 1px solid var(--line); border-radius: 6px; min-width: 0; }
 .result-header { display: flex; align-items: start; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.result-header-actions { display: flex; align-items: center; gap: 9px; flex: none; }
+.remove-button { min-height: 32px; padding: 4px 8px; border: 0; border-radius: 4px; background: transparent; color: var(--muted); font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
+.remove-button:hover { color: var(--danger); background: color-mix(in srgb, var(--danger) 8%, transparent); }
 .result-heading { min-width: 0; }
 .result-title { font-size: 16px; font-weight: 600; overflow-wrap: anywhere; line-height: 1.4; margin: 0; }
 .result-meta { margin: 5px 0 0; color: var(--muted); font-size: 13px; }
@@ -109,6 +121,8 @@ h2 { margin: 0; font-size: 28px; line-height: 1.2; letter-spacing: -1px; }
   .upload-panel, .output-panel { padding: 22px 18px; }
   .upload-panel { border-right: 0; border-bottom: 1px solid var(--line); }
   .dropzone { min-height: 270px; }
+  .batch-actions { align-items: flex-start; flex-direction: column; }
+  .batch-buttons { justify-content: flex-start; }
   .drop-title { font-size: 21px; }
   h2 { font-size: 24px; }
   .empty-state { padding-block: 22px; }

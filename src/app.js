@@ -5,6 +5,11 @@ const dropzone = document.querySelector('#dropzone');
 const results = document.querySelector('#results');
 const statusMessage = document.querySelector('#status-message');
 const clearButton = document.querySelector('#clear-results');
+const fileCount = document.querySelector('#file-count');
+const batchActions = document.querySelector('#batch-actions');
+const linksReady = document.querySelector('#links-ready');
+const copyAllButton = document.querySelector('#copy-all');
+const downloadLinksButton = document.querySelector('#download-links');
 let isWorking = false;
 let nextId = 0;
 
@@ -13,6 +18,31 @@ function element(tag, className, text) {
   if (className) node.className = className;
   if (text !== undefined) node.textContent = text;
   return node;
+}
+
+function magnetLinks() {
+  return Array.from(results.querySelectorAll('.magnet-output'), (field) => field.value);
+}
+
+function updateResultControls() {
+  const count = results.childElementCount;
+  const links = magnetLinks();
+  fileCount.textContent = `${count} ${count === 1 ? 'file' : 'files'}`;
+  clearButton.disabled = count === 0;
+  batchActions.hidden = links.length === 0;
+  linksReady.textContent = `${links.length} ${links.length === 1 ? 'link' : 'links'} ready`;
+}
+
+function addRemoveButton(row, name) {
+  const removeButton = element('button', 'remove-button', 'Remove');
+  removeButton.type = 'button';
+  removeButton.setAttribute('aria-label', `Remove ${name}`);
+  removeButton.addEventListener('click', () => {
+    row.remove();
+    updateResultControls();
+    statusMessage.textContent = results.childElementCount ? `Removed ${name}.` : 'Results cleared. Ready when you are.';
+  });
+  return removeButton;
 }
 
 function renderResult(item) {
@@ -27,16 +57,20 @@ function renderResult(item) {
   if (item.error) {
     const error = element('p', 'error-message', item.error);
     error.setAttribute('role', 'alert');
-    row.append(heading, error);
+    const header = element('div', 'result-header');
+    header.append(heading, addRemoveButton(row, item.name));
+    row.append(header, error);
     return row;
   }
 
   const { result } = item;
-  const summary = element('p', 'result-meta', `Content size ${formatBytes(result.size)}`);
+  const summary = element('p', 'result-meta', `${formatBytes(result.size)} · Content size`);
   heading.append(summary);
   const protocol = element('span', 'protocol-tag', result.protocol);
   const header = element('div', 'result-header');
-  header.append(heading, protocol);
+  const headerActions = element('div', 'result-header-actions');
+  headerActions.append(protocol, addRemoveButton(row, item.name));
+  header.append(heading, headerActions);
 
   const label = element('label', 'magnet-field-label', 'Magnet link');
   const output = element('textarea', 'magnet-output');
@@ -56,7 +90,9 @@ function renderResult(item) {
     try {
       if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
       await navigator.clipboard.writeText(result.uri);
+      copyButton.textContent = 'Copied';
       copyStatus.textContent = 'Magnet link copied.';
+      window.setTimeout(() => { copyButton.textContent = 'Copy link'; }, 1800);
     } catch {
       output.focus();
       output.select();
@@ -81,7 +117,8 @@ async function addFiles(fileList) {
   dropzone.classList.add('is-working');
   statusMessage.textContent = `Reading ${files.length} ${files.length === 1 ? 'file' : 'files'}…`;
   const completed = [];
-  for (const file of files) {
+  for (const [index, file] of files.entries()) {
+    statusMessage.textContent = `Converting file ${index + 1} of ${files.length}: ${file.name}`;
     try {
       const bytes = new Uint8Array(await file.arrayBuffer());
       const [item] = await processTorrentFiles([{ name: file.name, bytes }]);
@@ -97,7 +134,7 @@ async function addFiles(fileList) {
   statusMessage.textContent = failures
     ? `Converted ${successes} ${successes === 1 ? 'file' : 'files'}; ${failures} ${failures === 1 ? 'file needs' : 'files need'} attention.`
     : `Converted ${successes} ${successes === 1 ? 'file' : 'files'}.`;
-  clearButton.disabled = results.childElementCount === 0;
+  updateResultControls();
   fileInput.disabled = false;
   dropzone.classList.remove('is-working');
   isWorking = false;
@@ -125,4 +162,34 @@ clearButton.addEventListener('click', () => {
   results.replaceChildren();
   clearButton.disabled = true;
   statusMessage.textContent = 'Results cleared. Ready when you are.';
+  updateResultControls();
+});
+
+copyAllButton.addEventListener('click', async () => {
+  const links = magnetLinks();
+  if (!links.length) return;
+  try {
+    if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
+    await navigator.clipboard.writeText(links.join('\n'));
+    copyAllButton.textContent = 'Copied';
+    statusMessage.textContent = `Copied ${links.length} magnet ${links.length === 1 ? 'link' : 'links'}.`;
+    window.setTimeout(() => { copyAllButton.textContent = 'Copy all links'; }, 1800);
+  } catch {
+    statusMessage.textContent = 'Clipboard access is unavailable. Copy links individually from their result cards.';
+  }
+});
+
+downloadLinksButton.addEventListener('click', () => {
+  const links = magnetLinks();
+  if (!links.length) return;
+  const blob = new Blob([`${links.join('\n')}\n`], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const download = element('a');
+  download.href = url;
+  download.download = 'magnet-links.txt';
+  document.body.append(download);
+  download.click();
+  download.remove();
+  window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+  statusMessage.textContent = `Downloaded ${links.length} magnet ${links.length === 1 ? 'link' : 'links'} as TXT.`;
 });

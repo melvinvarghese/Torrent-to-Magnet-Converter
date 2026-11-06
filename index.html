@@ -40,16 +40,20 @@
           <input id="file-input" class="visually-hidden" type="file" accept=".torrent,application/x-bittorrent" multiple aria-label="Select .torrent files">
           <label class="dropzone" id="dropzone" for="file-input">
             <svg class="drop-icon" aria-hidden="true"><use href="#icon-file"/></svg>
-            <span class="drop-title">Drop .torrent files here</span>
-            <span class="drop-hint">or choose files from your device</span>
+            <span class="drop-title">Drop .torrent files to convert</span>
+            <span class="drop-hint">or choose files from your device · multiple files welcome</span>
             <span class="browse-button" aria-hidden="true">Browse files</span>
           </label>
         </section>
         <section class="output-panel" aria-labelledby="results-title">
-          <div class="converter-heading"><h2 id="results-title">Your magnet links</h2><button class="clear-button" id="clear-results" type="button" disabled>Clear all</button></div>
+          <div class="converter-heading"><div class="results-title-group"><h2 id="results-title">Your magnet links</h2><span class="file-count" id="file-count">0 files</span></div><button class="clear-button" id="clear-results" type="button" disabled>Clear all</button></div>
           <p class="status-message" id="status-message" role="status" aria-live="polite">Ready when you are.</p>
+          <div class="batch-actions" id="batch-actions" hidden>
+            <span class="links-ready" id="links-ready"></span>
+            <div class="batch-buttons"><button class="batch-button" id="copy-all" type="button">Copy all links</button><button class="batch-button" id="download-links" type="button">Download TXT</button></div>
+          </div>
           <div class="results" id="results" aria-live="polite"></div>
-          <div class="empty-state"><svg class="empty-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="m13 20-2 2a6 6 0 0 1-8-8l5-5a6 6 0 0 1 8 0m0 14a6 6 0 0 0 8 0l5-5a6 6 0 0 0-8-8l-2 2M11 21l10-10"/></svg><p>Your links will appear here</p><span>Add a torrent to get started.</span></div>
+          <div class="empty-state"><svg class="empty-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="m13 20-2 2a6 6 0 0 1-8-8l5-5a6 6 0 0 1 8 0m0 14a6 6 0 0 0 8 0l5-5a6 6 0 0 0-8-8l-2 2M11 21l10-10"/></svg><p>Your magnet links will appear here.</p><span>Add a torrent file to generate a shareable magnet link.</span></div>
         </section>
       </div>
       <p class="workspace-note"><svg class="icon" aria-hidden="true"><use href="#icon-lock"/></svg>Processed locally. No uploads. No account.</p>
