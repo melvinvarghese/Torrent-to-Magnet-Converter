@@ -29,6 +29,32 @@ npm test
 ```
 
 
+## Frequently asked questions
+
+### What does a torrent-to-magnet converter do?
+
+It reads the metadata inside a `.torrent` file and creates a magnet link that identifies the torrent. You can paste that link into a compatible BitTorrent client.
+
+### How do I convert a `.torrent` file into a magnet link?
+
+Open the converter, select or drop your `.torrent` file, and copy the magnet link it generates.
+
+### Are my torrent files uploaded to a server?
+
+No. The converter processes the selected files locally in your browser. It does not upload or save them, and it does not send them to analytics.
+
+### Does it support BitTorrent v1, v2, and hybrid torrents?
+
+Yes. It calculates v1 SHA-1 and v2 SHA-256 info hashes from the torrent metadata, including hybrid torrents.
+
+### Can I convert multiple torrent files at once?
+
+Yes. You can select or drop multiple `.torrent` files in one batch. If one file is invalid or unreadable, the others can still be processed.
+
+### Does the converter download the torrent or connect to peers?
+
+No. It only creates magnet links from torrent metadata. It does not download files, connect to peers, or verify downloaded content.
+
 ## Limits
 
 The converter reads torrent metadata to create a magnet link. It does not download torrent content, connect to peers, or verify piece contents. For hybrid torrents, it compares the v1 and v2 payload totals but does not fully validate file order or piece alignment. Use a BitTorrent client to verify the full metainfo and content.
