@@ -6,6 +6,7 @@ const results = document.querySelector('#results');
 const statusMessage = document.querySelector('#status-message');
 const clearButton = document.querySelector('#clear-results');
 const fileCount = document.querySelector('#file-count');
+const conversionProgress = document.querySelector('#conversion-progress');
 const batchActions = document.querySelector('#batch-actions');
 const linksReady = document.querySelector('#links-ready');
 const copyAllButton = document.querySelector('#copy-all');
@@ -33,6 +34,13 @@ function updateResultControls() {
   linksReady.textContent = `${links.length} ${links.length === 1 ? 'link' : 'links'} ready`;
 }
 
+function resetConversionProgress() {
+  conversionProgress.hidden = true;
+  conversionProgress.max = 1;
+  conversionProgress.value = 0;
+  conversionProgress.setAttribute('aria-valuetext', 'No files converted');
+}
+
 function addRemoveButton(row, name) {
   const removeButton = element('button', 'remove-button', 'Remove');
   removeButton.type = 'button';
@@ -40,6 +48,7 @@ function addRemoveButton(row, name) {
   removeButton.addEventListener('click', () => {
     row.remove();
     updateResultControls();
+    if (results.childElementCount === 0) resetConversionProgress();
     statusMessage.textContent = results.childElementCount ? `Removed ${name}.` : 'Results cleared. Ready when you are.';
   });
   return removeButton;
@@ -115,6 +124,10 @@ async function addFiles(fileList) {
   isWorking = true;
   fileInput.disabled = true;
   dropzone.classList.add('is-working');
+  conversionProgress.max = files.length;
+  conversionProgress.value = 0;
+  conversionProgress.setAttribute('aria-valuetext', `0 of ${files.length} files converted`);
+  conversionProgress.hidden = false;
   statusMessage.textContent = `Reading ${files.length} ${files.length === 1 ? 'file' : 'files'}…`;
   const completed = [];
   for (const [index, file] of files.entries()) {
@@ -126,6 +139,8 @@ async function addFiles(fileList) {
     } catch {
       completed.push({ name: file.name, error: 'This file could not be read. Try selecting it again.' });
     }
+    conversionProgress.value = index + 1;
+    conversionProgress.setAttribute('aria-valuetext', `${index + 1} of ${files.length} files converted`);
   }
   for (const item of completed) results.append(renderResult(item));
 
@@ -160,7 +175,7 @@ dropzone.addEventListener('drop', async (event) => {
 
 clearButton.addEventListener('click', () => {
   results.replaceChildren();
-  clearButton.disabled = true;
+  resetConversionProgress();
   statusMessage.textContent = 'Results cleared. Ready when you are.';
   updateResultControls();
 });

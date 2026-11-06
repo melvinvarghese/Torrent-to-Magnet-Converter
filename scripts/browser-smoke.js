@@ -73,7 +73,7 @@ async function run() {
     if (view.innerWidth > 850) {
       const introBounds = app.querySelector('.intro').getBoundingClientRect();
       const converterBounds = app.querySelector('.converter').getBoundingClientRect();
-      check(converterBounds.left >= introBounds.right - 1 && converterBounds.top <= introBounds.top + 24, 'desktop layout places converter beside the intro');
+      check(converterBounds.top >= introBounds.bottom, 'converter follows the hero in the desktop reading order');
     }
 
     const dangerousName = '<img src=x onerror=alert(1)>.torrent';
@@ -107,9 +107,16 @@ async function run() {
     check(rows[0].querySelector('.protocol-tag').textContent === 'v1', 'valid torrent shows its protocol');
     check(rows[1].querySelector('[role=alert]')?.textContent.length > 0, 'invalid torrent gets a visible error');
 
+    const originalClipboard = view.navigator.clipboard;
+    Object.defineProperty(view.navigator, 'clipboard', {
+      configurable: true,
+      value: { writeText: async () => { throw new Error('Clipboard blocked by the synthetic browser test'); } },
+    });
     rows[0].querySelector('.copy-button').click();
     await waitFor(() => Boolean(rows[0].querySelector('.copy-status').textContent));
     check(/copied|selected/i.test(rows[0].querySelector('.copy-status').textContent), 'copy action reports success or selects a fallback link');
+    if (originalClipboard) Object.defineProperty(view.navigator, 'clipboard', { configurable: true, value: originalClipboard });
+    else delete view.navigator.clipboard;
 
     app.querySelector('#clear-results').click();
     check(app.querySelectorAll('.result-row').length === 0, 'clear removes all results');

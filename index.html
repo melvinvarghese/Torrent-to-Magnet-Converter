@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#F4F3EE">
-  <meta name="description" content="Free torrent to magnet converter: convert .torrent files to BitTorrent v1, v2, and hybrid magnet links in your browser. No uploads; files stay on your device.">
+  <meta name="theme-color" content="#f2f0e8">
+  <meta name="description" content="Free torrent to magnet converter for BitTorrent v1, v2, and hybrid files. No uploads; conversion stays in your browser.">
   <title>Free Torrent to Magnet Converter | Private, Browser-Based</title>
   <link rel="stylesheet" href="./styles.css">
   <script type="module" src="./src/app.js"></script>
@@ -14,69 +14,91 @@
     <symbol id="icon-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="12" rx="2"/><path d="M8 10V6a4 4 0 0 1 8 0v4M12 15v3"/></symbol>
     <symbol id="icon-file" viewBox="0 0 48 48"><path d="M28 5H12a3 3 0 0 0-3 3v32a3 3 0 0 0 3 3h24a3 3 0 0 0 3-3V16L28 5Z M28 5v12h11M24 34V22m-6 6 6-6 6 6"/></symbol>
   </defs></svg>
+
   <header class="site-header">
     <a class="brand" href="./" aria-label="Torrent to Magnet Converter home">
       <svg class="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M7 4v13a9 9 0 0 0 18 0V4" stroke="currentColor" stroke-width="7"/><path d="M3.5 10h7m11 0h7" stroke="var(--canvas)" stroke-width="2"/></svg>
       <span>Torrent to Magnet</span>
     </a>
-    <a class="github-link" href="https://github.com/melvinvarghese/Torrent-to-Magnet-Converter">View on GitHub <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M11 3h6v6M17 3l-9 9M8 4H4v12h12v-4"/></svg></a>
+    <div class="header-actions"><span class="privacy-chip"><svg class="icon" aria-hidden="true"><use href="#icon-lock"/></svg>Private by design</span><a class="github-link" href="https://github.com/melvinvarghese/Torrent-to-Magnet-Converter">View source <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M11 3h6v6M17 3l-9 9M8 4H4v12h12v-4"/></svg></a></div>
   </header>
+
   <main class="page-shell">
     <section class="intro" aria-labelledby="page-title">
       <div class="intro-copy">
-        <p class="eyebrow"><span aria-hidden="true"></span>TORRENT TO MAGNET · PRIVATE BY DESIGN</p>
-        <h1 id="page-title">Your files stay.<br><em>Your links travel.</em></h1>
-        <p class="intro-text">Make a shareable magnet link from any .torrent file. The conversion stays right here in your browser.</p>
+        <p class="eyebrow"><span class="eyebrow-mark" aria-hidden="true"></span>A quieter way to share</p>
+        <h1 id="page-title">Torrent file<br>in. Magnet link<br>out.</h1>
+        <p class="intro-text">Turn a .torrent file into a link your torrent client can open. The file stays on this device from start to finish.</p>
+        <a class="jump-link" href="#converter">Convert a file <span aria-hidden="true">↓</span></a>
       </div>
-      <div class="hero-visual">
-        <svg class="magnet-art" viewBox="0 0 440 300" aria-hidden="true" focusable="false">
-          <rect class="art-paper" x="14" y="15" width="412" height="270" rx="7"/>
-          <path class="field-line" d="M76 119c-24 17-37 42-37 70 0 31 16 58 43 75"/>
-          <path class="field-line" d="M105 119c-18 15-28 36-28 60 0 26 12 47 33 62"/>
-          <path class="field-line" d="M364 119c24 17 37 42 37 70 0 31-16 58-43 75"/>
-          <path class="field-line" d="M335 119c18 15 28 36 28 60 0 26-12 47-33 62"/>
-          <circle class="art-orbit" cx="220" cy="155" r="112"/>
-          <path class="magnet-body" d="M168 65v92a52 52 0 0 0 104 0V65"/>
-          <path class="magnet-pole" d="M168 65v25m104-25v25"/>
-          <circle class="art-dot" cx="327" cy="67" r="7"/>
-          <circle class="art-dot" cx="112" cy="229" r="5"/>
-          <path class="art-arrow" d="M300 242h47m-8-8 8 8-8 8"/>
-          <text class="art-label" x="41" y="51">LOCAL</text>
-          <text class="art-label" x="334" y="271">SHAREABLE</text>
+      <figure class="hero-visual" aria-label="Illustration showing a local torrent file passing through a magnet and becoming a shareable link">
+        <svg class="magnet-art" viewBox="0 0 520 340" role="img" aria-labelledby="magnet-art-title">
+          <title id="magnet-art-title">A file becomes a magnet link, entirely on your device</title>
+          <path class="art-loop" d="M54 180c18-83 86-138 177-138h58c93 0 162 58 178 138-16 80-85 138-178 138h-58C140 318 72 263 54 180Z"/>
+          <path class="art-loop art-loop-inner" d="M78 180c17-69 72-113 153-113h55c82 0 138 46 154 113-16 67-72 113-154 113h-55C150 293 95 249 78 180Z"/>
+          <path class="art-trail" d="M138 180h73m-12-10 12 10-12 10M309 180h73m-12-10 12 10-12 10"/>
+          <g class="art-file">
+            <path d="M103 124h29l17 17v94a8 8 0 0 1-8 8h-38a8 8 0 0 1-8-8v-103a8 8 0 0 1 8-8Z"/>
+            <path d="M132 125v19h17M108 172h32M108 184h24"/>
+            <circle cx="113" cy="215" r="3"/>
+          </g>
+          <g class="art-magnet">
+            <path d="M218 116v63a42 42 0 0 0 84 0v-63"/>
+            <path d="M218 116v24m84-24v24"/>
+            <path class="art-pole" d="M218 116v24m84-24v24"/>
+          </g>
+          <g class="art-link">
+            <path d="M392 171h24a13 13 0 0 1 0 26h-22a13 13 0 0 1-13-13"/>
+            <path d="M411 190h-24a13 13 0 0 1 0-26h22a13 13 0 0 1 13 13"/>
+          </g>
+          <circle class="art-signal" cx="258" cy="42" r="5"/>
+          <circle class="art-signal art-signal-small" cx="442" cy="255" r="4"/>
+          <text class="art-label" x="87" y="276">ON THIS DEVICE</text>
+          <text class="art-label" x="365" y="276">READY TO SHARE</text>
+          <text class="art-protocol" x="259" y="248" text-anchor="middle">BT v1 · v2 · HYBRID</text>
         </svg>
-        <p class="hero-caption"><span>01—02</span> Drop a file. Take a link.</p>
-      </div>
+        <figcaption><span class="figure-index">01</span><span>Local file. Shareable link. Nothing sent away.</span></figcaption>
+      </figure>
     </section>
-    <section class="converter" aria-label="Torrent converter workspace">
+
+    <section class="converter" id="converter" aria-label="Torrent converter workspace">
+      <div class="workspace-topbar">
+        <div><p class="workspace-kicker">Your conversion desk</p><h2>Make a magnet link</h2></div>
+        <p class="workspace-promise"><svg class="icon" aria-hidden="true"><use href="#icon-lock"/></svg>Runs in your browser</p>
+      </div>
       <div class="workspace-grid">
         <section class="upload-panel" aria-labelledby="upload-title">
-          <div class="panel-heading"><span class="step-label">01 <i></i> ADD FILES</span><p>Batch conversion supported</p></div>
-          <h2 id="upload-title">Bring your<br>torrent files.</h2>
+          <div class="panel-heading"><span class="step-index">01</span><div><h3 id="upload-title">Choose torrent files</h3><p>One file or a whole batch.</p></div></div>
           <input id="file-input" class="visually-hidden" type="file" accept=".torrent,application/x-bittorrent" multiple aria-label="Select .torrent files">
           <label class="dropzone" id="dropzone" for="file-input">
             <span class="drop-icon-wrap"><svg class="drop-icon" aria-hidden="true"><use href="#icon-file"/></svg></span>
-            <span class="drop-title">Drop files to convert</span>
-            <span class="drop-hint">.torrent files · select or drop multiple</span>
-            <span class="browse-button" aria-hidden="true">Browse files</span>
+            <span class="drop-title">Drop files here</span>
+            <span class="drop-hint">or choose .torrent files from your device</span>
+            <span class="browse-button" aria-hidden="true">Browse files <span aria-hidden="true">↑</span></span>
           </label>
-        </section>
-        <section class="output-panel" aria-labelledby="results-title">
-          <div class="output-kicker"><span class="step-label">02 <i></i> YOUR LINKS</span><span class="output-lock"><svg class="icon" aria-hidden="true"><use href="#icon-lock"/></svg>LOCAL ONLY</span></div>
-          <div class="converter-heading"><div class="results-title-group"><h2 id="results-title">Ready to share.</h2><span class="file-count" id="file-count">0 files</span></div><button class="clear-button" id="clear-results" type="button" disabled>Clear all</button></div>
+          <progress class="conversion-progress" id="conversion-progress" max="1" value="0" aria-label="Files converted" hidden></progress>
           <p class="status-message" id="status-message" role="status" aria-live="polite">Ready when you are.</p>
+          <p class="local-note"><svg class="icon" aria-hidden="true"><use href="#icon-lock"/></svg>Files are read locally and never uploaded.</p>
+        </section>
+
+        <section class="output-panel" aria-labelledby="results-title">
+          <div class="output-heading">
+            <div class="panel-heading"><span class="step-index step-index-output">02</span><div><h3 id="results-title">Your magnet links</h3><p>Copy one link or take them all.</p></div></div>
+            <div class="results-title-actions"><span class="file-count" id="file-count">0 files</span><button class="clear-button" id="clear-results" type="button" disabled>Clear all</button></div>
+          </div>
           <div class="batch-actions" id="batch-actions" hidden>
             <span class="links-ready" id="links-ready"></span>
             <div class="batch-buttons"><button class="batch-button" id="copy-all" type="button">Copy all links</button><button class="batch-button" id="download-links" type="button">Download TXT</button></div>
           </div>
           <div class="results" id="results" aria-live="polite"></div>
-          <div class="empty-state"><svg class="empty-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="m13 20-2 2a6 6 0 0 1-8-8l5-5a6 6 0 0 1 8 0m0 14a6 6 0 0 0 8 0l5-5a6 6 0 0 0-8-8l-2 2M11 21l10-10"/></svg><p>Your magnet links will appear here.</p><span>Add a torrent file to generate a shareable magnet link.</span></div>
+          <div class="empty-state"><span class="empty-spark" aria-hidden="true">✳</span><div><p>Your links land here.</p><span>Add a .torrent file to get started.</span></div></div>
         </section>
       </div>
-      <p class="workspace-note"><svg class="icon" aria-hidden="true"><use href="#icon-lock"/></svg>Processed locally. No uploads. No account.</p>
+      <details class="how-it-works"><summary>What happens to my file? <span class="disclosure-icon" aria-hidden="true"></span></summary><p>Your browser reads the torrent metadata, calculates the v1 or v2 info hash, and creates a magnet link for your torrent client. Hybrid torrents include both hashes. The file never leaves this page, and this tool does not download torrent content or connect to peers.</p></details>
     </section>
-    <noscript><p class="noscript-note">Enable JavaScript to convert files. Conversion happens entirely in your browser.</p></noscript>
-    <details class="how-it-works"><summary>How it works <span class="disclosure-icon" aria-hidden="true"></span></summary><p>Choose one or more .torrent files. Your browser reads the metadata, calculates the v1 or v2 info hash, and creates a magnet link you can copy into your torrent client. Hybrid torrents include both hashes. Files are never uploaded or saved by this page; the converter does not download torrent content or connect to peers.</p></details>
+    <noscript><p class="noscript-note">Enable JavaScript to convert files. Your files are processed in this browser.</p></noscript>
   </main>
-  <footer class="site-footer"><span>Built by <a href="https://melvinvarghese.in">Melvin Varghese</a>.</span><span>Everything stays in your browser.</span></footer>
+
+  <footer class="site-footer"><span>Made by <a href="https://melvinvarghese.in">Melvin Varghese</a>.</span><span>Private by design. Useful by default.</span></footer>
 </body>
 </html>
