@@ -24,29 +24,33 @@
   <main class="page-shell">
     <section class="intro" aria-labelledby="page-title">
       <div class="intro-copy">
-        <h1 id="page-title">Small file.<br>Ready-to-share link.</h1>
-        <p class="intro-text">Turn .torrent files into magnet links, right in your browser.</p>
+        <p class="eyebrow"><span aria-hidden="true"></span>PRIVATE TORRENT UTILITY</p>
+        <h1 id="page-title">Torrent in.<br><span>Magnet out.</span></h1>
+        <p class="intro-text">Turn torrent files into shareable magnet links. Everything happens in your browser.</p>
       </div>
-      <div class="privacy-summary">
-        <p class="privacy-note"><svg class="icon" aria-hidden="true"><use href="#icon-lock"/></svg>Your files stay on this device</p>
-        <div class="format-list" aria-label="Supported torrent formats"><span>BitTorrent v1</span><span>BitTorrent v2</span><span>Hybrid</span></div>
+      <div class="hero-aside">
+        <div class="hero-route" aria-hidden="true"><span>.TORRENT</span><i></i><span>MAGNET</span></div>
+        <p class="hero-aside-title">Private by design.</p>
+        <p class="hero-aside-copy">Your files stay on this device. No uploads, no account.</p>
+        <div class="format-list" aria-label="Supported torrent formats"><span>v1</span><span>v2</span><span>Hybrid</span></div>
       </div>
     </section>
     <section class="converter" aria-label="Torrent converter workspace">
       <div class="workspace-grid">
         <section class="upload-panel" aria-labelledby="upload-title">
-          <h2 id="upload-title">Add your torrents</h2>
-          <p class="panel-description">Batch conversion supported</p>
+          <div class="panel-heading"><span class="step-label">01 <i></i> ADD FILES</span><p>Batch conversion supported</p></div>
+          <h2 id="upload-title">Bring your<br>torrent files.</h2>
           <input id="file-input" class="visually-hidden" type="file" accept=".torrent,application/x-bittorrent" multiple aria-label="Select .torrent files">
           <label class="dropzone" id="dropzone" for="file-input">
-            <svg class="drop-icon" aria-hidden="true"><use href="#icon-file"/></svg>
-            <span class="drop-title">Drop .torrent files to convert</span>
-            <span class="drop-hint">or choose files from your device · multiple files welcome</span>
+            <span class="drop-icon-wrap"><svg class="drop-icon" aria-hidden="true"><use href="#icon-file"/></svg></span>
+            <span class="drop-title">Drop files to convert</span>
+            <span class="drop-hint">.torrent files · select or drop multiple</span>
             <span class="browse-button" aria-hidden="true">Browse files</span>
           </label>
         </section>
         <section class="output-panel" aria-labelledby="results-title">
-          <div class="converter-heading"><div class="results-title-group"><h2 id="results-title">Your magnet links</h2><span class="file-count" id="file-count">0 files</span></div><button class="clear-button" id="clear-results" type="button" disabled>Clear all</button></div>
+          <div class="output-kicker"><span class="step-label">02 <i></i> YOUR LINKS</span><span class="output-lock"><svg class="icon" aria-hidden="true"><use href="#icon-lock"/></svg>LOCAL ONLY</span></div>
+          <div class="converter-heading"><div class="results-title-group"><h2 id="results-title">Ready to share.</h2><span class="file-count" id="file-count">0 files</span></div><button class="clear-button" id="clear-results" type="button" disabled>Clear all</button></div>
           <p class="status-message" id="status-message" role="status" aria-live="polite">Ready when you are.</p>
           <div class="batch-actions" id="batch-actions" hidden>
             <span class="links-ready" id="links-ready"></span>
