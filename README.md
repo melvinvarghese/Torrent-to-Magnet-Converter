@@ -20,6 +20,14 @@ Convert `.torrent` files to magnet links for BitTorrent v1, v2, and hybrid torre
 
 The converter reads files in browser memory. It does not upload them, save them, or send them to analytics.
 
+## Tests
+
+Run the test suite with Node.js 20 or newer:
+
+```sh
+npm test
+```
+
 
 ## Limits
 
